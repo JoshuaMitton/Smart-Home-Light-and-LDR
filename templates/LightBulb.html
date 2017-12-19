@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml4/loose.dtd">
+
+<html>
+  <head>
+    <title>Smart Home Devices</title>
+    <script>
+    function turnLightOn(){ 
+      var img = document.getElementById("image");
+      img.src = "/static/imagetest/LightBulbOn.png";
+      return false;
+    }
+    function turnLightOff(){ 
+      var img = document.getElementById("image");
+      img.src = "/static/imagetest/LightBulbOff.png";
+      return false;
+    }
+    </script>
+  </head>
+
+ 
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+  <body align="middle">
+    <br/>
+    <br/>
+    <div text-align="center">
+      {% if (lighton|int == 1) %}
+        <img id = "image" style="vertical-align:middle" src="/static/imagetest/LightBulbOn.png" alt="Debian Logo" class="floating_element" width="200" height="200"/>
+      {% else %}
+        <img id = "image" style="vertical-align:middle" src="/static/imagetest/LightBulbOff.png" alt="Debian Logo" class="floating_element" width="200" height="200"/>
+      {% endif %}
+      <div>
+        <form action="/buttonOn/" method="post" >
+          <button name="turn_on" style="width:80px;height:40px;background-color:#FFFFFF;font-size:20px;border-radius:8px;border:3px solid #000000" type="submit"> On </button>
+        </form>
+        <form action="/buttonOff/" method="post" >
+          <button name="turn_off" style="width:80px;height:40px;background-color:#FFFFFF;font-size:20px;border-radius:8px;border:3px solid #000000" type="submit"> Off </button>
+        </form>
+      </div>
+    </div>
+    <br/>
+    <br/>
+  </body>
+</html>
+

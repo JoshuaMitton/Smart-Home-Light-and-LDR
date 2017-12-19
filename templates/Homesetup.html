@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml4/loose.dtd">
+
+
+
+<html>
+  <head>
+    <title>Activate Smart Home Device</title>
+    <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.2.1.js"></script>
+    <script>
+    $(document).ready(function(){
+	    $("#btnAddDevice").click(function(){
+		    $.ajax({
+			    url: '/Homesetup',
+			    data: $('form').serialize(),
+			    type: 'POST',
+			    success: function(response) {
+				    alert(response);
+				    console.log(response);
+				    location.href = '/light'
+			    },
+			    error: function(error) {
+				    alert('error');
+				    console.log(error);
+				    location.href = '/Homeactivate'
+			    }
+		    });
+	    });
+    });
+    </script>
+  
+    <!-- <link rel="stylesheet" type="text/css" href="static/homeActivate.css">-->
+  
+  </head>
+
+
+  <body>
+      <div align="center">
+	<br>
+	<br>
+        <img id = "SmartHome" style="vertical-align:middle" src="/static/imagetest/SmartHouse.png" alt="Debian Logo" class="floating_element" width="200" height="200"/>
+      </div>
+      <div align="center">
+        <form class="form-AddDevice">
+
+        <input type="text" name="deviceName" id="deviceName" placeholder="device name" style="width: 200px; height: 30px; background-color: #FFFFFF; font-size: 16px; text-align: center; color: grey">
+
+	<select name="deviceTypeDD" id="deviceTypeDD" style="width: 200px; height: 36px; background-color: #FFFFFF; font-size: 16px; text-align: center; color: grey">
+		<option value="LightBulb">Light Bulb</option>
+		<option value="LightDetector">Light Detector</option>
+	</select>
+	
+        <input type="text" name="deviceType" id="deviceType" placeholder="device type" style="width: 200px; height: 30px; background-color: #FFFFFF; font-size: 16px; text-align: center; color: grey">
+	
+	<select name="deviceIpDD" id="deviceIpDD" style="width: 200px; height: 36px; background-color: #FFFFFF; font-size: 16px; text-align: center; color: grey">
+		{% for list_element in ipAddresses %}
+			<option value="{{ list_element }}"> {{ list_element }} </option>
+		{% endfor %}
+		<option value="LightBulb">Light Bulb</option>
+		<option value="LightDetector">Light Detector</option>
+	</select>	
+
+        <input type="text" name="deviceIp" id="deviceIp" placeholder="device id" style="width: 200px; height: 30px; background-color: #FFFFFF; font-size: 16px; text-align: center; color: grey">
+
+	<br>
+	<br>
+	<button id="btnAddDevice" style="width: 200px; height: 35px; background-color: #FFFFFF; font-size: 16px; text-align: center; border-radius: 15px; color: black">Add Device</button>
+      </div>
+  </body>
+</html>
+
